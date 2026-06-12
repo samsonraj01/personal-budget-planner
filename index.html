@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Personal Budget Planner | Auto-Save & Restore | Excel VBA Export</title>
+    <title>Personal Budget Planner | Indian Rupees (₹) | Auto-Save & Restore | Excel VBA Export</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(145deg, #e9f0f5 0%, #d9e2ec 100%);
+            background: linear-gradient(145deg, #eef2f0 0%, #e0e8e2 100%);
             font-family: 'Inter', sans-serif;
             padding: 2rem 1.5rem;
-            color: #1a2c3e;
+            color: #1e3a2f;
         }
         .container { max-width: 1400px; margin: 0 auto; }
         .hero {
@@ -22,23 +22,23 @@
         .hero h1 {
             font-size: 2.4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #1e4668, #2b7a62);
+            background: linear-gradient(135deg, #1e5a3a, #2b7a62);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
         }
-        .hero p { color: #2c4c6e; font-weight: 500; margin-top: 0.5rem; }
+        .hero p { color: #2c5a46; font-weight: 500; margin-top: 0.5rem; }
         .dashboard { display: flex; flex-wrap: wrap; gap: 1.8rem; }
         .left-panel { flex: 1.2; min-width: 280px; }
         .right-panel { flex: 2; min-width: 380px; }
         .card {
-            background: rgba(255,255,255,0.94);
+            background: rgba(255,255,255,0.96);
             backdrop-filter: blur(2px);
             border-radius: 32px;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.12);
             padding: 1.5rem 1.8rem;
             margin-bottom: 1.8rem;
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.6);
         }
         .card-title {
             font-size: 1.5rem;
@@ -47,7 +47,7 @@
             display: flex;
             align-items: center;
             gap: 0.6rem;
-            color: #1f4e6e;
+            color: #1f5e46;
             border-left: 4px solid #2b8c6e;
             padding-left: 1rem;
         }
@@ -66,21 +66,21 @@
             flex: 1;
             min-width: 110px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.02);
-            border: 1px solid #e2edf2;
+            border: 1px solid #deeae2;
             text-align: center;
         }
-        .stat-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #5d7f9e; }
-        .stat-number { font-size: 1.7rem; font-weight: 800; margin-top: 0.4rem; color: #1e4668; }
+        .stat-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #4f7a66; }
+        .stat-number { font-size: 1.7rem; font-weight: 800; margin-top: 0.4rem; color: #1e5a3a; }
         .stat-number.positive { color: #1f8a6b; }
         .stat-number.warning { color: #c95a2e; }
         .form-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem; }
         .input-group { flex: 1; min-width: 130px; }
-        .input-group label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 0.3rem; color: #3c6e8f; }
+        .input-group label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 0.3rem; color: #3c6e5a; }
         input, select {
             width: 100%;
             padding: 0.7rem 0.9rem;
             border-radius: 20px;
-            border: 1px solid #cbdde6;
+            border: 1px solid #cbdcd2;
             background: white;
             font-family: 'Inter', monospace;
             font-size: 0.9rem;
@@ -128,20 +128,20 @@
         }
         .transactions-table-wrapper { overflow-x: auto; border-radius: 24px; }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { text-align: left; padding: 1rem 0.8rem; background: #eef3f7; color: #1f4e6e; font-weight: 600; }
-        td { padding: 0.8rem; border-bottom: 1px solid #e2edf2; vertical-align: middle; }
+        th { text-align: left; padding: 1rem 0.8rem; background: #edf5f0; color: #1f5e46; font-weight: 600; }
+        td { padding: 0.8rem; border-bottom: 1px solid #deeae2; vertical-align: middle; }
         .badge-income { background: #dff6ef; color: #1d764d; padding: 0.2rem 0.6rem; border-radius: 30px; font-weight: 600; font-size: 0.7rem; display: inline-block; }
         .badge-expense { background: #ffe3e0; color: #bc4a2c; padding: 0.2rem 0.6rem; border-radius: 30px; font-weight: 600; font-size: 0.7rem; }
         .action-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #8aaec0; transition: 0.1s; }
         .action-btn:hover { color: #cd5c5c; }
         .empty-row td { text-align: center; color: #8aa0ae; padding: 2rem; }
         .total-row { font-weight: 700; background: #f8fbfd; }
-        footer { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #5c7f9a; }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.75rem; color: #5c7f6e; }
         .toast-msg {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #1f4e6e;
+            background: #1f5e46;
             color: white;
             padding: 12px 20px;
             border-radius: 40px;
@@ -152,14 +152,15 @@
             opacity: 0;
             pointer-events: none;
         }
+        .rupee-symbol { font-weight: 600; }
         @media (max-width: 780px) { body { padding: 1rem; } .card { padding: 1.2rem; } .stat-number { font-size: 1.3rem; } }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="hero">
-        <h1><i class="fas fa-coins"></i> Personal Budget Planner</h1>
-        <p>Auto-save in browser · Restore previous versions · Export to Excel with VBA macros</p>
+        <h1><i class="fas fa-rupee-sign"></i> Personal Budget Planner (₹ INR)</h1>
+        <p>Track income & expenses in Indian Rupees · Auto-save · Restore old data · Excel VBA export</p>
     </div>
 
     <div class="dashboard">
@@ -169,11 +170,11 @@
                 <div class="card-title"><i class="fas fa-plus-circle"></i><span>Add Transaction</span></div>
                 <div class="form-row">
                     <div class="input-group"><label><i class="fas fa-tag"></i> Description</label><input type="text" id="descInput" placeholder="e.g., Groceries, Salary"></div>
-                    <div class="input-group"><label><i class="fas fa-dollar-sign"></i> Amount</label><input type="number" id="amountInput" placeholder="0.00" step="0.01"></div>
+                    <div class="input-group"><label><i class="fas fa-rupee-sign"></i> Amount (₹)</label><input type="number" id="amountInput" placeholder="0.00" step="0.01"></div>
                 </div>
                 <div class="form-row">
                     <div class="input-group"><label><i class="fas fa-calendar-alt"></i> Date</label><input type="date" id="dateInput"></div>
-                    <div class="input-group"><label><i class="fas fa-exchange-alt"></i> Type</label><select id="typeInput"><option value="income">💵 Income</option><option value="expense">💸 Expense</option></select></div>
+                    <div class="input-group"><label><i class="fas fa-exchange-alt"></i> Type</label><select id="typeInput"><option value="income">💰 Income</option><option value="expense">💸 Expense</option></select></div>
                     <div class="input-group"><label><i class="fas fa-layer-group"></i> Category</label><select id="categoryInput"><option value="Food">Food</option><option value="Transport">Transport</option><option value="Bills">Bills</option><option value="Entertainment">Entertainment</option><option value="Salary">Salary</option><option value="Other">Other</option></select></div>
                 </div>
                 <div class="flex-btns">
@@ -182,13 +183,13 @@
                 </div>
             </div>
 
-            <!-- Financial Snapshot -->
+            <!-- Financial Snapshot in Rupees -->
             <div class="card">
-                <div class="card-title"><i class="fas fa-chart-line"></i><span>Financial Snapshot</span></div>
+                <div class="card-title"><i class="fas fa-chart-line"></i><span>Financial Snapshot (₹)</span></div>
                 <div class="stats-grid">
-                    <div class="stat-card"><div class="stat-label">Total Income</div><div class="stat-number positive" id="totalIncomeDisplay">$0.00</div></div>
-                    <div class="stat-card"><div class="stat-label">Total Expenses</div><div class="stat-number warning" id="totalExpenseDisplay">$0.00</div></div>
-                    <div class="stat-card"><div class="stat-label">Net Balance</div><div class="stat-number" id="netBalanceDisplay">$0.00</div></div>
+                    <div class="stat-card"><div class="stat-label">Total Income</div><div class="stat-number positive" id="totalIncomeDisplay">₹0.00</div></div>
+                    <div class="stat-card"><div class="stat-label">Total Expenses</div><div class="stat-number warning" id="totalExpenseDisplay">₹0.00</div></div>
+                    <div class="stat-card"><div class="stat-label">Net Balance</div><div class="stat-number" id="netBalanceDisplay">₹0.00</div></div>
                 </div>
                 <div style="margin-top:0.6rem;font-size:0.8rem;text-align:center;background:#f0f6fa;border-radius:30px;padding:0.4rem"><i class="fas fa-chart-pie"></i> Savings rate: <strong id="savingsRate">0%</strong> of income</div>
             </div>
@@ -208,7 +209,7 @@
                         </select>
                         <button class="btn btn-sm" id="applyRestoreBtn" style="background:#2b8c6e;"><i class="fas fa-undo-alt"></i> Restore Selected</button>
                     </div>
-                    <div style="font-size: 0.7rem; margin-top: 10px; color: #5d7f9e;">
+                    <div style="font-size: 0.7rem; margin-top: 10px; color: #5d7f6e;">
                         <i class="fas fa-info-circle"></i> Browser stores your budget automatically. Create named backups to restore olden data.
                     </div>
                 </div>
@@ -224,15 +225,15 @@
                 </div>
                 <div class="transactions-table-wrapper">
                     <table id="transactionTable">
-                        <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th><th style="width: 50px;">Action</th></tr></thead>
+                        <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount (₹)</th><th style="width: 50px;">Action</th></tr></thead>
                         <tbody id="tableBody"><tr class="empty-row"><td colspan="6">Loading...</td></tr></tbody>
-                        <tfoot id="tableFoot" style="display: none;"><tr class="total-row"><td colspan="4"><strong>Total</strong></td><td colspan="2" id="footerTotal">$0.00</td></tr></tfoot>
+                        <tfoot id="tableFoot" style="display: none;"><tr class="total-row"><td colspan="4"><strong>Net Total</strong></td><td colspan="2" id="footerTotal">₹0.00</td></tr></tfoot>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <footer><i class="fas fa-chart-simple"></i> Auto-save on every change. Create named backups to restore olden data. Export includes VBA macro instructions.</footer>
+    <footer><i class="fas fa-rupee-sign"></i> All amounts in Indian Rupees (₹). Auto-save on every change. Create backups to restore older budgets. Excel export includes VBA macro instructions.</footer>
 </div>
 <div id="toastMsg" class="toast-msg"></div>
 
@@ -240,9 +241,8 @@
 <script>
     // ---------- DATA ----------
     let transactions = [];
-    let currentBackupKey = "budget_active";
-    const STORAGE_ACTIVE = "budget_active";
-    const BACKUP_PREFIX = "budget_backup_";
+    const STORAGE_ACTIVE = "budget_active_inr";
+    const BACKUP_PREFIX = "budget_backup_inr_";
 
     // Helper: show toast
     function showToast(message, isError = false) {
@@ -253,12 +253,16 @@
         setTimeout(() => { toast.style.opacity = "0"; }, 2800);
     }
 
+    // Format currency in Rupees
+    function formatINR(amount) {
+        return '₹' + amount.toFixed(2);
+    }
+
     // Save current active data to localStorage
     function saveActiveData() {
         const dataToStore = JSON.stringify(transactions);
         localStorage.setItem(STORAGE_ACTIVE, dataToStore);
-        // Also update the last active time metadata
-        localStorage.setItem("budget_last_modified", new Date().toISOString());
+        localStorage.setItem("budget_last_modified_inr", new Date().toISOString());
         showToast("✓ Auto-saved to browser storage", false);
     }
 
@@ -274,14 +278,16 @@
         return false;
     }
 
-    // Initialize with demo data if empty
+    // Initialize with demo data in Rupees
     function initDemoData() {
         if(transactions.length === 0) {
+            const today = new Date().toISOString().slice(0,10);
             transactions = [
-                { id: Date.now()+101, date: new Date().toISOString().slice(0,10), description: "Freelance Project", amount: 1250.00, type: "income", category: "Salary" },
-                { id: Date.now()+102, date: new Date().toISOString().slice(0,10), description: "Groceries", amount: 84.50, type: "expense", category: "Food" },
-                { id: Date.now()+103, date: new Date().toISOString().slice(0,10), description: "Electricity Bill", amount: 112.30, type: "expense", category: "Bills" },
-                { id: Date.now()+104, date: new Date().toISOString().slice(0,10), description: "Salary", amount: 3200.00, type: "income", category: "Salary" }
+                { id: Date.now()+101, date: today, description: "Freelance Project", amount: 12500.00, type: "income", category: "Salary" },
+                { id: Date.now()+102, date: today, description: "Groceries", amount: 845.50, type: "expense", category: "Food" },
+                { id: Date.now()+103, date: today, description: "Electricity Bill", amount: 1120.30, type: "expense", category: "Bills" },
+                { id: Date.now()+104, date: today, description: "Monthly Salary", amount: 45000.00, type: "income", category: "Salary" },
+                { id: Date.now()+105, date: today, description: "Metro Travel", amount: 350.00, type: "expense", category: "Transport" }
             ];
             saveActiveData();
         }
@@ -302,7 +308,7 @@
         }
     }
 
-    // Save current transactions as a named backup (timestamp)
+    // Create named backup
     function createNamedBackup() {
         if(transactions.length === 0) {
             showToast("No transactions to backup. Add some entries first.", true);
@@ -321,7 +327,7 @@
         populateBackupSelector();
     }
 
-    // Get all backups list
+    // Get all backups
     function getAllBackups() {
         const backups = [];
         for(let i = 0; i < localStorage.length; i++) {
@@ -346,7 +352,8 @@
         backups.forEach(backup => {
             const option = document.createElement("option");
             option.value = backup.key;
-            option.textContent = `${backup.name} (${new Date(backup.createdAt).toLocaleString()})`;
+            const dateStr = backup.createdAt !== "unknown" ? new Date(backup.createdAt).toLocaleString() : "old backup";
+            option.textContent = `${backup.name} (${dateStr})`;
             select.appendChild(option);
         });
         if(backups.length === 0) {
@@ -378,7 +385,7 @@
         } catch(e) { showToast("Failed to restore backup.", true); return false; }
     }
 
-    // DELETE all? clear
+    // Clear all transactions
     function clearAllTransactions() {
         if(confirm("⚠️ Permanently delete ALL current transactions? (Backups remain safe)")) {
             transactions = [];
@@ -389,7 +396,7 @@
         }
     }
 
-    // add transaction logic
+    // Add transaction
     function addTransaction() {
         let desc = document.getElementById("descInput").value.trim();
         let amountRaw = document.getElementById("amountInput").value;
@@ -397,7 +404,7 @@
         let type = document.getElementById("typeInput").value;
         let category = document.getElementById("categoryInput").value;
         if(desc === "") { showToast("Please enter description.", true); return; }
-        if(amountRaw === "" || isNaN(parseFloat(amountRaw)) || parseFloat(amountRaw) <= 0) { showToast("Valid positive amount required.", true); return; }
+        if(amountRaw === "" || isNaN(parseFloat(amountRaw)) || parseFloat(amountRaw) <= 0) { showToast("Valid positive amount required (₹).", true); return; }
         if(!dateVal) { showToast("Select a date.", true); return; }
         const amount = parseFloat(amountRaw);
         const newTransaction = {
@@ -414,9 +421,8 @@
         updateSummary();
         document.getElementById("descInput").value = "";
         document.getElementById("amountInput").value = "";
-        // keep date default, but set today after clear
         document.getElementById("dateInput").value = new Date().toISOString().slice(0,10);
-        showToast(`Added ${type === 'income' ? 'Income' : 'Expense'}: ${desc}`, false);
+        showToast(`Added ${type === 'income' ? 'Income' : 'Expense'}: ${desc} (₹${amount.toFixed(2)})`, false);
     }
 
     function deleteTransaction(id) {
@@ -437,10 +443,10 @@
 
     function updateSummary() {
         const { totalIncome, totalExpense, netBalance, savingsRate } = computeTotals();
-        document.getElementById("totalIncomeDisplay").innerHTML = `$${totalIncome.toFixed(2)}`;
-        document.getElementById("totalExpenseDisplay").innerHTML = `$${totalExpense.toFixed(2)}`;
+        document.getElementById("totalIncomeDisplay").innerHTML = formatINR(totalIncome);
+        document.getElementById("totalExpenseDisplay").innerHTML = formatINR(totalExpense);
         const netElem = document.getElementById("netBalanceDisplay");
-        netElem.innerHTML = `$${netBalance.toFixed(2)}`;
+        netElem.innerHTML = formatINR(netBalance);
         netElem.classList.remove("positive", "warning");
         if(netBalance >= 0) netElem.classList.add("positive"); else netElem.classList.add("warning");
         document.getElementById("savingsRate").innerHTML = `${savingsRate}%`;
@@ -459,7 +465,7 @@
         let html = "";
         const sorted = [...transactions].sort((a,b) => new Date(b.date) - new Date(a.date));
         sorted.forEach(t => {
-            const amountFormatted = `$${t.amount.toFixed(2)}`;
+            const amountFormatted = `₹${t.amount.toFixed(2)}`;
             const typeBadge = t.type === "income" ? `<span class="badge-income">Income</span>` : `<span class="badge-expense">Expense</span>`;
             const amountColor = t.type === "income" ? "style='color:#1f8a6b; font-weight:600;'" : "style='color:#c95a2e; font-weight:600;'";
             html += `<tr>
@@ -473,37 +479,37 @@
         });
         tbody.innerHTML = html;
         const { netBalance } = computeTotals();
-        document.getElementById("footerTotal").innerHTML = `$${netBalance.toFixed(2)}`;
+        document.getElementById("footerTotal").innerHTML = formatINR(netBalance);
     }
 
     function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
 
-    // EXPORT EXCEL with VBA instructions
+    // EXPORT EXCEL with VBA instructions (Rupees format)
     function exportToExcelWithVBA() {
         if(transactions.length === 0) { showToast("No data to export.", true); return; }
-        const sheetData = [["Date", "Description", "Category", "Type", "Amount"]];
+        const sheetData = [["Date", "Description", "Category", "Type", "Amount (₹)"]];
         transactions.forEach(t => { sheetData.push([t.date, t.description, t.category, t.type === "income" ? "Income" : "Expense", t.amount]); });
         const { totalIncome, totalExpense, netBalance, savingsRate } = computeTotals();
-        sheetData.push(["", "", "", "TOTAL INCOME", totalIncome]);
-        sheetData.push(["", "", "", "TOTAL EXPENSE", totalExpense]);
-        sheetData.push(["", "", "", "NET BALANCE", netBalance]);
+        sheetData.push(["", "", "", "TOTAL INCOME (₹)", totalIncome]);
+        sheetData.push(["", "", "", "TOTAL EXPENSE (₹)", totalExpense]);
+        sheetData.push(["", "", "", "NET BALANCE (₹)", netBalance]);
         sheetData.push(["", "", "", "SAVINGS RATE (%)", savingsRate]);
 
         const wb = XLSX.utils.book_new();
         const wsData = XLSX.utils.aoa_to_sheet(sheetData);
-        wsData['!cols'] = [{wch:12},{wch:28},{wch:12},{wch:12},{wch:14}];
-        XLSX.utils.book_append_sheet(wb, wsData, "Budget_Data");
+        wsData['!cols'] = [{wch:12},{wch:28},{wch:12},{wch:16},{wch:14}];
+        XLSX.utils.book_append_sheet(wb, wsData, "Budget_Data_INR");
 
-        const vbaCode = `Option Explicit\n' VBA Macro: Refresh Summary\nSub RefreshBudget()\n    Dim ws As Worksheet, lastRow As Long, i As Long\n    Dim totalInc As Double, totalExp As Double, amountVal As Double, typeVal As String\n    Set ws = ActiveSheet\n    lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row\n    totalInc = 0: totalExp = 0\n    For i = 2 To lastRow\n        If IsNumeric(ws.Cells(i, 5).Value) Then\n            amountVal = CDbl(ws.Cells(i, 5).Value)\n            typeVal = Trim(ws.Cells(i, 4).Value)\n            If LCase(typeVal) = "income" Then totalInc = totalInc + amountVal\n            If LCase(typeVal) = "expense" Then totalExp = totalExp + amountVal\n        End If\n    Next i\n    Dim netBal As Double: netBal = totalInc - totalExp\n    Dim summaryRow As Long: summaryRow = lastRow + 3\n    ws.Cells(summaryRow, 1).Value = "AUTO SUMMARY (VBA)": ws.Cells(summaryRow, 1).Font.Bold = True\n    ws.Cells(summaryRow + 1, 1).Value = "Total Income:": ws.Cells(summaryRow + 1, 2).Value = totalInc\n    ws.Cells(summaryRow + 2, 1).Value = "Total Expense:": ws.Cells(summaryRow + 2, 2).Value = totalExp\n    ws.Cells(summaryRow + 3, 1).Value = "Net Balance:": ws.Cells(summaryRow + 3, 2).Value = netBal\n    If totalInc > 0 Then ws.Cells(summaryRow + 4, 1).Value = "Savings Rate:": ws.Cells(summaryRow + 4, 2).Value = (netBal / totalInc) * 100\n    MsgBox "Budget summary updated!", vbInformation\nEnd Sub`;
+        const vbaCode = `Option Explicit\n' VBA Macro: Refresh Budget Summary (Indian Rupees)\nSub RefreshBudget()\n    Dim ws As Worksheet, lastRow As Long, i As Long\n    Dim totalInc As Double, totalExp As Double, amountVal As Double, typeVal As String\n    Set ws = ActiveSheet\n    lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row\n    totalInc = 0: totalExp = 0\n    For i = 2 To lastRow\n        If IsNumeric(ws.Cells(i, 5).Value) Then\n            amountVal = CDbl(ws.Cells(i, 5).Value)\n            typeVal = Trim(ws.Cells(i, 4).Value)\n            If LCase(typeVal) = "income" Then totalInc = totalInc + amountVal\n            If LCase(typeVal) = "expense" Then totalExp = totalExp + amountVal\n        End If\n    Next i\n    Dim netBal As Double: netBal = totalInc - totalExp\n    Dim summaryRow As Long: summaryRow = lastRow + 3\n    ws.Cells(summaryRow, 1).Value = "AUTO SUMMARY (VBA)": ws.Cells(summaryRow, 1).Font.Bold = True\n    ws.Cells(summaryRow + 1, 1).Value = "Total Income (₹):": ws.Cells(summaryRow + 1, 2).Value = totalInc\n    ws.Cells(summaryRow + 2, 1).Value = "Total Expense (₹):": ws.Cells(summaryRow + 2, 2).Value = totalExp\n    ws.Cells(summaryRow + 3, 1).Value = "Net Balance (₹):": ws.Cells(summaryRow + 3, 2).Value = netBal\n    If totalInc > 0 Then ws.Cells(summaryRow + 4, 1).Value = "Savings Rate (%):": ws.Cells(summaryRow + 4, 2).Value = (netBal / totalInc) * 100\n    MsgBox "Budget summary updated! (₹)", vbInformation\nEnd Sub`;
         const vbaLines = vbaCode.split('\n').map(line => [line]);
         const wsVBA = XLSX.utils.aoa_to_sheet(vbaLines);
-        wsVBA['!cols'] = [{wch:90}];
+        wsVBA['!cols'] = [{wch:95}];
         XLSX.utils.book_append_sheet(wb, wsVBA, "VBA_Macro_Code");
-        XLSX.writeFile(wb, `Budget_Export_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.xlsx`);
-        showToast("Excel file generated! Includes VBA macro code sheet.", false);
+        XLSX.writeFile(wb, `Budget_INR_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.xlsx`);
+        showToast("Excel file generated! Includes VBA macro code sheet (₹ format).", false);
     }
 
-    // EVENTS
+    // Event listeners
     document.getElementById("addBtn")?.addEventListener("click", addTransaction);
     document.getElementById("clearAllBtn")?.addEventListener("click", clearAllTransactions);
     document.getElementById("exportExcelBtn")?.addEventListener("click", exportToExcelWithVBA);
@@ -523,9 +529,10 @@
             }
         }
     });
+    
     function setDefaultDate() { if(!document.getElementById("dateInput").value) document.getElementById("dateInput").value = new Date().toISOString().slice(0,10); }
     
-    // Initialize whole app
+    // Initialize app
     if(!loadActiveData()) { transactions = []; initDemoData(); loadActiveData(); }
     if(transactions.length === 0) initDemoData();
     renderTable();
